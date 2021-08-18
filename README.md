@@ -1,14 +1,30 @@
 # country_state_city_pro
 
-A new Flutter project.
+A new Flutter package to get world's all of Country, State, and City.
+And items are also searchable. In addition if city can't be found then 
+user manually write city on field.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+### Platforms:
+This widget has been successfully tested on iOS, Android and Chrome.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
+![image info](assets/ex_img/sc_1.png)
+![image info](assets/ex_img/sc_2.png)
+![image info](assets/ex_img/sc_3.png)
+![image info](assets/ex_img/sc_4.png)
+![image info](assets/ex_img/sc_5.png)
+![image info](assets/ex_img/sc_6.png)
+
+## Usage
+```dart
+CountryStateCityPicker(
+                country: country,
+                state: state,
+                city: city,
+                textFieldInputBorder: UnderlineInputBorder(),
+            ),
+```
+
+
