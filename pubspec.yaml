@@ -1,7 +1,9 @@
 name: country_state_city_pro
-description: A new Flutter project.
+description: A new Flutter package to get world's all of Country, State, and City.
+  And items are also searchable. In addition if city can't be found then
+  user manually write city on dialog window.
 version: 0.0.1
-homepage:
+homepage: https://github.com/SujitSarkar/Country-State-City-Picker-Pro
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

@@ -2,7 +2,7 @@
 
 A new Flutter package to get world's all of Country, State, and City.
 And items are also searchable. In addition if city can't be found then 
-user manually write city on field.
+user manually write city on dialog window.
 
 ## Getting Started
 
