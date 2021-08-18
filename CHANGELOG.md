@@ -1,4 +1,4 @@
-## 0.0.1
+## 0.0.2
 
 ### Platforms:
 This widget has been successfully tested on iOS, Android and Chrome.
