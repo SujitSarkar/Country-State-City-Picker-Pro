@@ -97,5 +97,5 @@ class _HomePageState extends State<HomePage> {
 ```
 
 ## Connect with
-<a href="mailto:sujitsarkar.cse@gmail.com">sujitsarkar.cse@gmail.com</a>
+<a href="mailto:sujitsarkar.cse@gmail.com">sujitsarkar.cse@gmail.com</a><br>
 <a href="https://github.com/SujitSarkar">Find more project on github</a>
