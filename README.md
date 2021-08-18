@@ -10,8 +10,8 @@ user manually write city on field.
 This widget has been successfully tested on iOS, Android and Chrome.
 
 ## Screenshots
-![image info](assets/ex_img/sc_1.png)
-![image info](assets/ex_img/sc_2.png)
+Screenshot-1 | Screenshot-2
+![image info](assets/ex_img/sc_1.png) | ![image info](assets/ex_img/sc_2.png)
 ![image info](assets/ex_img/sc_3.png)
 ![image info](assets/ex_img/sc_4.png)
 ![image info](assets/ex_img/sc_5.png)
