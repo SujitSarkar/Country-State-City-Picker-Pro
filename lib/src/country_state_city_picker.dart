@@ -35,7 +35,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
   Future<void> _getCountry()async{
     _countryList.clear();
-    var jsonString = await rootBundle.loadString('assets/country.json');
+    var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/country.json');
     List<dynamic> body = json.decode(jsonString);
     setState(() {
       _countryList = body.map((dynamic item) => CountryModel.fromJson(item)).toList();
@@ -47,7 +47,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     _stateList.clear();
     _cityList.clear();
     List<StateModel> _subStateList=[];
-    var jsonString = await rootBundle.loadString('assets/state.json');
+    var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/state.json');
     List<dynamic> body = json.decode(jsonString);
 
     _subStateList = body.map((dynamic item) => StateModel.fromJson(item)).toList();
@@ -64,7 +64,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   Future<void> _getCity(String stateId)async{
     _cityList.clear();
     List<CityModel> _subCityList=[];
-    var jsonString = await rootBundle.loadString('assets/city.json');
+    var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/city.json');
     List<dynamic> body = json.decode(jsonString);
 
     _subCityList = body.map((dynamic item) => CityModel.fromJson(item)).toList();

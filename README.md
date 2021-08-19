@@ -12,15 +12,15 @@ This widget has been successfully tested on iOS, Android and Chrome.
 ## Screenshots
 Outlook                               | Country Dialog
 --------------------------------------|--------------------------------------
-![image info](assets/ex_img/sc_1.png) | ![image info](assets/ex_img/sc_2.png)
+![image info](lib/assets/ex_img/sc_1.png) | ![image info](lib/assets/ex_img/sc_2.png)
 
 Country Searching                     | State Dialog
 --------------------------------------|--------------------------------------
-![image info](assets/ex_img/sc_3.png) | ![image info](assets/ex_img/sc_4.png)
+![image info](lib/assets/ex_img/sc_3.png) | ![image info](lib/assets/ex_img/sc_4.png)
 
 City Dialog                           | Final Data
 --------------------------------------|--------------------------------------
-![image info](assets/ex_img/sc_5.png) | ![image info](assets/ex_img/sc_6.png)
+![image info](lib/assets/ex_img/sc_5.png) | ![image info](lib/assets/ex_img/sc_6.png)
 
 ## Usage
 ```dart
