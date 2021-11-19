@@ -9,9 +9,7 @@ class CountryStateCityPicker extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
-  String? defaultCountry;
-  String? defaultCity;
-  String? defaultState;
+
   InputBorder? textFieldInputBorder;
   InputDecoration? inputDecoration;
   BoxDecoration? searchBoxDecoration;
@@ -22,9 +20,6 @@ class CountryStateCityPicker extends StatefulWidget {
     required this.country,
     required this.state,
     required this.city,
-    this.defaultCity,
-    this.defaultCountry,
-    this.defaultState,
     this.inputDecoration,
     this.textFieldInputBorder,
     this.dialogBoxHeight,
@@ -41,21 +36,15 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   List<StateModel> _stateList = [];
   List<CityModel> _cityList = [];
 
-  String? x;
   @override
   void initState() {
     super.initState();
     _getCountry();
-    x = widget.defaultCountry ?? "";
   }
 
-  List<CountryModel> _countrySubList = [
-    CountryModel(id: "101", sortName: "IN", name: "India", phoneCode: "91"),
-  ];
+  List<CountryModel> _countrySubList = [];
 
-  List<StateModel> _stateSubList = [
-    StateModel(id: "10", name: "Delhi", countryId: "101")
-  ];
+  List<StateModel> _stateSubList = [];
   List<CityModel> _citySubList = [];
   String _title = '';
 
