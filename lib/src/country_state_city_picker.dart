@@ -56,7 +56,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     setState(() {
       _countryList =
           body.map((dynamic item) => CountryModel.fromJson(item)).toList();
-      _countrySubList.clear();
+
       _countrySubList = _countryList;
     });
   }
@@ -78,7 +78,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
         });
       }
     });
-    _stateSubList.clear();
+
     _stateSubList = _stateList;
   }
 
