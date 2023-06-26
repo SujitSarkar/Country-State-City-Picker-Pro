@@ -10,17 +10,17 @@ user manually write city on dialog window.
 This widget has been successfully tested on iOS, Android and Chrome.
 
 ## Screenshots
-Outlook                               | Country Dialog
---------------------------------------|--------------------------------------
-![image info](lib/assets/ex_img/sc_1.png) | ![image info](lib/assets/ex_img/sc_2.png)
+| Outlook                                   | Country Dialog                            |
+|-------------------------------------------|-------------------------------------------|
+| ![image info](lib/assets/ex_img/sc_1.png) | ![image info](lib/assets/ex_img/sc_2.png) |
 
-Country Searching                     | State Dialog
---------------------------------------|--------------------------------------
-![image info](lib/assets/ex_img/sc_3.png) | ![image info](lib/assets/ex_img/sc_4.png)
+| Country Searching                         | State Dialog                              |
+|-------------------------------------------|-------------------------------------------|
+| ![image info](lib/assets/ex_img/sc_3.png) | ![image info](lib/assets/ex_img/sc_4.png) |
 
-City Dialog                           | Final Data
---------------------------------------|--------------------------------------
-![image info](lib/assets/ex_img/sc_5.png) | ![image info](lib/assets/ex_img/sc_6.png)
+| City Dialog                               | Final Data                                |
+|-------------------------------------------|-------------------------------------------|
+| ![image info](lib/assets/ex_img/sc_5.png) | ![image info](lib/assets/ex_img/sc_6.png) |
 
 ## Usage
 ```dart
@@ -36,7 +36,12 @@ CountryStateCityPicker(
                 country: country,
                 state: state,
                 city: city,
-                textFieldInputBorder: UnderlineInputBorder(),
+                dialogColor: Colors.grey.shade200,
+                textFieldDecoration: InputDecoration(
+                  fillColor: Colors.blueGrey.shade100,
+                  filled: true,
+                  suffixIcon: const Icon(Icons.arrow_downward_rounded),
+                  border: const OutlineInputBorder(borderSide: BorderSide.none))
             ),
 ```
 
@@ -83,7 +88,12 @@ class _HomePageState extends State<HomePage> {
                 country: country,
                 state: state,
                 city: city,
-                textFieldInputBorder: UnderlineInputBorder(),
+                dialogColor: Colors.grey.shade200,
+                textFieldDecoration: InputDecoration(
+                   fillColor: Colors.blueGrey.shade100,
+                   filled: true,
+                   suffixIcon: const Icon(Icons.arrow_downward_rounded), 
+                   border: const OutlineInputBorder(borderSide: BorderSide.none))
               ),
               SizedBox(height: 20),
 
