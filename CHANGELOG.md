@@ -8,3 +8,6 @@ Fixed some bugs and improved efficiency.
 
 ## 0.0.4
 Optimized code and give user to access modify UI.
+
+## 0.0.5
+Code Optimized.
