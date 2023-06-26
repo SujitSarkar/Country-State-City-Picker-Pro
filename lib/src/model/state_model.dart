@@ -1,7 +1,7 @@
 class StateModel {
-  String id;
-  String name;
-  String countryId;
+  final String id;
+  final String name;
+  final String countryId;
 
   StateModel({required this.id, required this.name, required this.countryId});
 

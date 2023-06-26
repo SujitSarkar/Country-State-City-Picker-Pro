@@ -42,7 +42,12 @@ class _HomePageState extends State<HomePage> {
                 country: country,
                 state: state,
                 city: city,
-                textFieldInputBorder: UnderlineInputBorder(),
+                dialogColor: Colors.grey.shade200,
+                textFieldDecoration: InputDecoration(
+                   fillColor: Colors.blueGrey.shade100,
+                   filled: true,
+                   suffixIcon: const Icon(Icons.arrow_downward_rounded),
+                   border: const OutlineInputBorder(borderSide: BorderSide.none))
               ),
               SizedBox(height: 20),
 

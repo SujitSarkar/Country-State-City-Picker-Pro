@@ -1,7 +1,7 @@
 class CityModel {
-  String id;
-  String name;
-  String stateId;
+  final String id;
+  final String name;
+  final String stateId;
 
   CityModel({required this.id, required this.name, required this.stateId});
 

@@ -1,8 +1,8 @@
 class CountryModel {
-  String id;
-  String sortName;
-  String name;
-  String phoneCode;
+  final String id;
+  final String sortName;
+  final String name;
+  final String phoneCode;
 
   CountryModel(
       {required this.id,
