@@ -11,3 +11,6 @@ Optimized code and give user to access modify UI.
 
 ## 0.0.5
 Code Optimized.
+
+## 0.0.6
+Code formated and provide example.
