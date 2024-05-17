@@ -1,24 +1,55 @@
 import 'dart:convert';
+import 'package:country_state_city_pro/src/model/dialog_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import './model/city_model.dart';
 import './model/country_model.dart';
 import './model/state_model.dart';
+import 'model/field_hint_text.dart';
 
 class CountryStateCityPicker extends StatefulWidget {
+  final ValueChanged<CountryModel>? onCountryChanged;
+  final ValueChanged<StateModel>? onStateChanged;
+  final ValueChanged<CityModel>? onCityChanged;
   final TextEditingController country;
   final TextEditingController state;
   final TextEditingController city;
+  final String? locale;
   final InputDecoration? textFieldDecoration;
   final Color? dialogColor;
+  final double? spacing;
+  final TextStyle? inputStyle;
+  final FieldHintText? fieldHintText;
+  final DialogTitle? dialogTitle;
+  final String? validateCountrySnackBarMessage;
+  final String? validateStateSnackBarMessage;
+  final String? closeTextButton;
+  final ButtonStyle? closeButtonStyle;
+  final String? inputSearchHintText;
+  final TextStyle? inputSearchTextStyle;
+  final InputDecoration? inputSearchDecoration;
+  final EdgeInsetsGeometry? inputSearchPadding;
+
 
   const CountryStateCityPicker(
       {super.key,
-      required this.country,
-      required this.state,
-      required this.city,
-      this.textFieldDecoration,
-      this.dialogColor});
+        required this.country,
+        required this.state,
+        required this.city,
+        this.textFieldDecoration,
+        this.dialogColor,
+        this.spacing,
+        this.fieldHintText,
+        this.dialogTitle,
+        this.validateCountrySnackBarMessage,
+        this.validateStateSnackBarMessage,
+        this.closeTextButton,
+        this.closeButtonStyle, this.inputSearchHintText,
+        this.inputSearchDecoration, this.inputSearchPadding,
+        this.inputStyle, this.inputSearchTextStyle,
+        this.locale, this.onCountryChanged,
+        this.onStateChanged, this.onCityChanged
+      });
 
   @override
   State<CountryStateCityPicker> createState() => _CountryStateCityPickerState();
@@ -33,6 +64,9 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   List<StateModel> _stateSubList = [];
   List<CityModel> _citySubList = [];
   String _title = '';
+  String searchKey = '';
+  FieldHintText defaultHintText = FieldHintText();
+  DialogTitle defaultDialogTitle = DialogTitle();
 
   @override
   void initState() {
@@ -41,9 +75,10 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   }
 
   Future<void> _getCountry() async {
+
     _countryList.clear();
     var jsonString = await rootBundle
-        .loadString('packages/country_state_city_pro/assets/country.json');
+        .loadString('packages/country_state_city_pro/assets/${widget.locale ?? 'en' }/country.json');
     List<dynamic> body = json.decode(jsonString);
     setState(() {
       _countryList =
@@ -57,7 +92,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     _cityList.clear();
     List<StateModel> subStateList = [];
     var jsonString = await rootBundle
-        .loadString('packages/country_state_city_pro/assets/state.json');
+        .loadString('packages/country_state_city_pro/assets/en/state.json');
     List<dynamic> body = json.decode(jsonString);
 
     subStateList =
@@ -76,7 +111,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     _cityList.clear();
     List<CityModel> subCityList = [];
     var jsonString = await rootBundle
-        .loadString('packages/country_state_city_pro/assets/city.json');
+        .loadString('packages/country_state_city_pro/assets/en/city.json');
     List<dynamic> body = json.decode(jsonString);
 
     subCityList = body.map((dynamic item) => CityModel.fromJson(item)).toList();
@@ -97,50 +132,80 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
         ///Country TextField
         TextField(
           controller: widget.country,
+          style: widget.inputStyle,
           onTap: () {
-            setState(() => _title = 'Country');
+            setState(() {
+              searchKey = 'Country';
+              _title = widget.dialogTitle != null
+                  ? widget.dialogTitle!.countryDialogTitle
+                  : defaultDialogTitle.countryDialogTitle;
+            });
             _showDialog(context);
           },
           decoration: widget.textFieldDecoration == null
-              ? defaultDecoration.copyWith(hintText: 'Select country')
+              ? defaultDecoration.copyWith(hintText: widget.fieldHintText != null
+              ? widget.fieldHintText!.countryHintText
+              : defaultHintText.countryHintText)
               : widget.textFieldDecoration
-                  ?.copyWith(hintText: 'Select country'),
+              ?.copyWith(hintText: widget.fieldHintText != null
+              ? widget.fieldHintText!.countryHintText
+              : defaultHintText.countryHintText),
           readOnly: true,
         ),
-        const SizedBox(height: 8.0),
+        SizedBox(height: widget.spacing?? 10.0),
 
         ///State TextField
         TextField(
           controller: widget.state,
+          style: widget.inputStyle,
           onTap: () {
-            setState(() => _title = 'State');
+            setState(() {
+              searchKey = 'State';
+              _title = widget.dialogTitle != null
+                  ? widget.dialogTitle!.stateDialogTitle
+                  : defaultDialogTitle.stateDialogTitle;
+            });
             if (widget.country.text.isNotEmpty) {
               _showDialog(context);
             } else {
-              _showSnackBar('Select Country');
+              _showSnackBar(widget.validateCountrySnackBarMessage ?? 'Select Country');
             }
           },
           decoration: widget.textFieldDecoration == null
-              ? defaultDecoration.copyWith(hintText: 'Select state')
-              : widget.textFieldDecoration?.copyWith(hintText: 'Select state'),
+              ? defaultDecoration.copyWith(hintText: widget.fieldHintText != null
+              ? widget.fieldHintText!.stateHintText
+              : defaultHintText.stateHintText)
+              : widget.textFieldDecoration?.copyWith(hintText: widget.fieldHintText != null
+              ? widget.fieldHintText!.stateHintText
+              : defaultHintText.stateHintText),
           readOnly: true,
         ),
-        const SizedBox(height: 8.0),
+        SizedBox(height: widget.spacing?? 10.0),
 
         ///City TextField
         TextField(
           controller: widget.city,
+          style: widget.inputStyle,
           onTap: () {
-            setState(() => _title = 'City');
+            setState(() {
+              searchKey = 'City';
+              _title = widget.dialogTitle != null
+                  ? widget.dialogTitle!.cityDialogTitle
+                  : defaultDialogTitle.cityDialogTitle;
+            });
             if (widget.state.text.isNotEmpty) {
               _showDialog(context);
             } else {
-              _showSnackBar('Select State');
+              _showSnackBar(widget.validateStateSnackBarMessage ?? 'Select State');
             }
           },
           decoration: widget.textFieldDecoration == null
-              ? defaultDecoration.copyWith(hintText: 'Select city')
-              : widget.textFieldDecoration?.copyWith(hintText: 'Select city'),
+              ? defaultDecoration.copyWith(hintText: widget.fieldHintText != null
+              ? widget.fieldHintText!.cityHintText
+              : defaultHintText.cityHintText)
+              : widget.textFieldDecoration?.copyWith(hintText: widget.fieldHintText != null
+              ? widget.fieldHintText!.cityHintText
+              : defaultHintText.cityHintText),
           readOnly: true,
         ),
       ],
@@ -183,44 +248,47 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                       const SizedBox(height: 10),
 
                       ///Text Field
-                      TextField(
-                        controller: _title == 'Country'
-                            ? controller
-                            : _title == 'State'
-                                ? controller2
-                                : controller3,
-                        onChanged: (val) {
-                          setState(() {
-                            if (_title == 'Country') {
-                              _countrySubList = _countryList
-                                  .where((element) => element.name
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase()))
-                                  .toList();
-                            } else if (_title == 'State') {
-                              _stateSubList = _stateList
-                                  .where((element) => element.name
-                                      .toLowerCase()
-                                      .contains(controller2.text.toLowerCase()))
-                                  .toList();
-                            } else if (_title == 'City') {
-                              _citySubList = _cityList
-                                  .where((element) => element.name
-                                      .toLowerCase()
-                                      .contains(controller3.text.toLowerCase()))
-                                  .toList();
-                            }
-                          });
-                        },
-                        style: TextStyle(
-                            color: Colors.grey.shade800, fontSize: 16.0),
-                        decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            hintText: "Search here...",
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 15, horizontal: 5),
-                            isDense: true,
-                            prefixIcon: Icon(Icons.search)),
+                      Padding(
+                        padding: widget.inputSearchPadding ??  EdgeInsets.all(.0),
+                        child: TextField(
+                          controller: searchKey == 'Country'
+                              ? controller
+                              : searchKey == 'State'
+                              ? controller2
+                              : controller3,
+                          onChanged: (val) {
+                            setState(() {
+                              if (searchKey == 'Country') {
+                                _countrySubList = _countryList
+                                    .where((element) => element.name
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase()))
+                                    .toList();
+                              } else if (searchKey == 'State') {
+                                _stateSubList = _stateList
+                                    .where((element) => element.name
+                                    .toLowerCase()
+                                    .contains(controller2.text.toLowerCase()))
+                                    .toList();
+                              } else if (searchKey == 'City') {
+                                _citySubList = _cityList
+                                    .where((element) => element.name
+                                    .toLowerCase()
+                                    .contains(controller3.text.toLowerCase()))
+                                    .toList();
+                              }
+                            });
+                          },
+                          style: widget.inputSearchTextStyle ??  TextStyle(
+                              color: Colors.grey.shade800, fontSize: 15.0),
+                          decoration: widget.inputSearchDecoration ?? InputDecoration(
+                              border: UnderlineInputBorder(),
+                              hintText: widget.inputSearchHintText ?? "Search here...",
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 5),
+                              isDense: true,
+                              prefixIcon: Icon(Icons.search)),
+                        ),
                       ),
 
                       ///Dropdown Items
@@ -228,31 +296,38 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                         child: ListView.builder(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 12),
-                          itemCount: _title == 'Country'
+                          itemCount: searchKey == 'Country'
                               ? _countrySubList.length
-                              : _title == 'State'
-                                  ? _stateSubList.length
-                                  : _citySubList.length,
+                              : searchKey == 'State'
+                              ? _stateSubList.length
+                              : _citySubList.length,
                           physics: const ClampingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () async {
                                 setState(() {
-                                  if (_title == "Country") {
-                                    widget.country.text =
-                                        _countrySubList[index].name;
+                                  if (searchKey == "Country") {
+                                    widget.country.text = _countrySubList[index].name;
+                                    if(widget.onCountryChanged != null){
+                                      widget.onCountryChanged!(_countrySubList[index]);
+                                    }
                                     _getState(_countrySubList[index].id);
                                     _countrySubList = _countryList;
                                     widget.state.clear();
                                     widget.city.clear();
-                                  } else if (_title == 'State') {
-                                    widget.state.text =
-                                        _stateSubList[index].name;
+                                  } else if (searchKey == 'State') {
+                                    widget.state.text = _stateSubList[index].name;
+                                    if(widget.onStateChanged != null){
+                                      widget.onStateChanged!(_stateSubList[index]);
+                                    }
                                     _getCity(_stateSubList[index].id);
                                     _stateSubList = _stateList;
                                     widget.city.clear();
-                                  } else if (_title == 'City') {
+                                  } else if (searchKey == 'City') {
                                     widget.city.text = _citySubList[index].name;
+                                    if(widget.onCityChanged != null){
+                                      widget.onCityChanged!(_citySubList[index]);
+                                    }
                                     _citySubList = _cityList;
                                   }
                                 });
@@ -265,11 +340,11 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                                 padding: const EdgeInsets.only(
                                     bottom: 20.0, left: 10.0, right: 10.0),
                                 child: Text(
-                                    _title == 'Country'
+                                    searchKey == 'Country'
                                         ? _countrySubList[index].name
-                                        : _title == 'State'
-                                            ? _stateSubList[index].name
-                                            : _citySubList[index].name,
+                                        : searchKey == 'State'
+                                        ? _stateSubList[index].name
+                                        : _citySubList[index].name,
                                     style: TextStyle(
                                         color: Colors.grey.shade800,
                                         fontSize: 16.0)),
@@ -279,11 +354,10 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                         ),
                       ),
                       OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0))),
+                        style: widget.closeButtonStyle ??
+                            OutlinedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0))),
                         onPressed: () {
-                          if (_title == 'City' && _citySubList.isEmpty) {
+                          if (searchKey == 'City' && _citySubList.isEmpty) {
                             widget.city.text = controller3.text;
                           }
                           _countrySubList = _countryList;
@@ -295,7 +369,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                           controller3.clear();
                           Navigator.pop(context);
                         },
-                        child: const Text('Close'),
+                        child: Text(widget.closeTextButton ?? 'Close'),
                       )
                     ],
                   ),
