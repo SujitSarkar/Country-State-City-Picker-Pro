@@ -6,7 +6,7 @@ import './model/country_model.dart';
 import './model/state_model.dart';
 
 class CountryStateCityPicker extends StatefulWidget {
-  final TextEditingController ? country;
+  final TextEditingController? country;
   final TextEditingController state;
   final TextEditingController city;
   final InputDecoration? textFieldDecoration;
@@ -14,7 +14,7 @@ class CountryStateCityPicker extends StatefulWidget {
 
   const CountryStateCityPicker({
     super.key,
-     this.country,
+    this.country,
     required this.state,
     required this.city,
     this.textFieldDecoration,
@@ -44,7 +44,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     _getCountry(); // Load the countries list
 
     // Auto-load states for India by passing the India ID (assuming it's in your data)
-    _getState("101"); // Assuming '101' is the ID for India, replace with actual ID if needed
+    _getState(
+        "101"); // Assuming '101' is the ID for India, replace with actual ID if needed
   }
 
   Future<void> _getCountry() async {
@@ -101,25 +102,24 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ///Country TextField (Hidden)
-        TextField(
-          controller: widget.country,
-          onTap: () {
-            // Optionally allow user to change country
-            // _showDialog(context); // If you want to keep this.
-          },
-          decoration: widget.textFieldDecoration == null
-              ? defaultDecoration.copyWith(hintText: 'Select country')
-              : widget.textFieldDecoration
-                  ?.copyWith(hintText: 'Select country'),
-          readOnly: true, // Hide it from the UI but it's still functional
-          enabled: false, // Country is fixed to India
-        ),
-        const SizedBox(height: 8.0),
+        // TextField(
+        //   controller: widget.country,
+        //   onTap: () {
+        //     // Optionally allow user to change country
+        //     // _showDialog(context); // If you want to keep this.
+        //   },
+        //   decoration: widget.textFieldDecoration == null
+        //       ? defaultDecoration.copyWith(hintText: 'Select country')
+        //       : widget.textFieldDecoration
+        //           ?.copyWith(hintText: 'Select country'),
+        //   readOnly: true, // Hide it from the UI but it's still functional
+        //   enabled: false, // Country is fixed to India
+        // ),
+
+        const SizedBox(height: 20.0),
 
         ///State TextField with custom label
         TextField(
-          
           controller: widget.state,
           onTap: () {
             setState(() => _title = 'State');
@@ -136,7 +136,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                   hintText: 'Select state', labelText: 'State'), // Added label
           readOnly: true,
         ),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 20.0),
 
         ///City TextField with custom label
         TextField(
@@ -338,7 +338,6 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
   InputDecoration defaultDecoration = const InputDecoration(
       isDense: true,
-      
       hintText: 'Select',
       suffixIcon: Icon(Icons.arrow_drop_down),
       border: OutlineInputBorder());
