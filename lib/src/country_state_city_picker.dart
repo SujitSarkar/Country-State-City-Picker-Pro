@@ -12,13 +12,14 @@ class CountryStateCityPicker extends StatefulWidget {
   final InputDecoration? textFieldDecoration;
   final Color? dialogColor;
 
-  const CountryStateCityPicker(
-      {super.key,
-      required this.country,
-      required this.state,
-      required this.city,
-      this.textFieldDecoration,
-      this.dialogColor});
+  const CountryStateCityPicker({
+    super.key,
+    required this.country,
+    required this.state,
+    required this.city,
+    this.textFieldDecoration,
+    this.dialogColor,
+  });
 
   @override
   State<CountryStateCityPicker> createState() => _CountryStateCityPickerState();
@@ -36,8 +37,14 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
   @override
   void initState() {
-    _getCountry();
     super.initState();
+
+    // Set default country to India on initialization
+    widget.country.text = "India";
+    _getCountry(); // Load the countries list
+
+    // Auto-load states for India by passing the India ID (assuming it's in your data)
+    _getState("101"); // Assuming '101' is the ID for India, replace with actual ID if needed
   }
 
   Future<void> _getCountry() async {
@@ -94,22 +101,23 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ///Country TextField
+        ///Country TextField (Hidden)
         TextField(
           controller: widget.country,
           onTap: () {
-            setState(() => _title = 'Country');
-            _showDialog(context);
+            // Optionally allow user to change country
+            // _showDialog(context); // If you want to keep this.
           },
           decoration: widget.textFieldDecoration == null
               ? defaultDecoration.copyWith(hintText: 'Select country')
               : widget.textFieldDecoration
                   ?.copyWith(hintText: 'Select country'),
-          readOnly: true,
+          readOnly: true, // Hide it from the UI but it's still functional
+          enabled: false, // Country is fixed to India
         ),
         const SizedBox(height: 8.0),
 
-        ///State TextField
+        ///State TextField with custom label
         TextField(
           controller: widget.state,
           onTap: () {
@@ -121,13 +129,15 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
             }
           },
           decoration: widget.textFieldDecoration == null
-              ? defaultDecoration.copyWith(hintText: 'Select state')
-              : widget.textFieldDecoration?.copyWith(hintText: 'Select state'),
+              ? defaultDecoration.copyWith(
+                  hintText: 'Select state', labelText: 'State') // Added label
+              : widget.textFieldDecoration?.copyWith(
+                  hintText: 'Select state', labelText: 'State'), // Added label
           readOnly: true,
         ),
         const SizedBox(height: 8.0),
 
-        ///City TextField
+        ///City TextField with custom label
         TextField(
           controller: widget.city,
           onTap: () {
@@ -139,8 +149,10 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
             }
           },
           decoration: widget.textFieldDecoration == null
-              ? defaultDecoration.copyWith(hintText: 'Select city')
-              : widget.textFieldDecoration?.copyWith(hintText: 'Select city'),
+              ? defaultDecoration.copyWith(
+                  hintText: 'Select city', labelText: 'City') // Added label
+              : widget.textFieldDecoration?.copyWith(
+                  hintText: 'Select city', labelText: 'City'), // Added label
           readOnly: true,
         ),
       ],
@@ -182,7 +194,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                               fontWeight: FontWeight.w500)),
                       const SizedBox(height: 10),
 
-                      ///Text Field
+                      ///Text Field for Searching
                       TextField(
                         controller: _title == 'Country'
                             ? controller
