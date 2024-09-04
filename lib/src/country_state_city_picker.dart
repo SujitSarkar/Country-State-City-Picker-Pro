@@ -349,15 +349,26 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
               topRight: Radius.circular(20.0),
             ),
           ),
-          child: Center(
-            child: Text(
-              message,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 16.0,
+          child: Column(
+            children: [
+              Icon(
+                Icons.dangerous,
+                color: Color(0xFF0B716B),
               ),
-            ),
+              SizedBox(
+                height: 16,
+              ),
+              Center(
+                child: Text(
+                  'Please select a State',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },
