@@ -6,7 +6,7 @@ import './model/country_model.dart';
 import './model/state_model.dart';
 
 class CountryStateCityPicker extends StatefulWidget {
-  final TextEditingController country;
+  final TextEditingController ? country;
   final TextEditingController state;
   final TextEditingController city;
   final InputDecoration? textFieldDecoration;
@@ -14,7 +14,7 @@ class CountryStateCityPicker extends StatefulWidget {
 
   const CountryStateCityPicker({
     super.key,
-    required this.country,
+     this.country,
     required this.state,
     required this.city,
     this.textFieldDecoration,
@@ -40,7 +40,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     super.initState();
 
     // Set default country to India on initialization
-    widget.country.text = "India";
+    widget.country!.text = "India";
     _getCountry(); // Load the countries list
 
     // Auto-load states for India by passing the India ID (assuming it's in your data)
@@ -119,10 +119,11 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
         ///State TextField with custom label
         TextField(
+          
           controller: widget.state,
           onTap: () {
             setState(() => _title = 'State');
-            if (widget.country.text.isNotEmpty) {
+            if (widget.country!.text.isNotEmpty) {
               _showDialog(context);
             } else {
               _showSnackBar('Select Country');
@@ -251,7 +252,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                               onTap: () async {
                                 setState(() {
                                   if (_title == "Country") {
-                                    widget.country.text =
+                                    widget.country!.text =
                                         _countrySubList[index].name;
                                     _getState(_countrySubList[index].id);
                                     _countrySubList = _countryList;
@@ -337,6 +338,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
   InputDecoration defaultDecoration = const InputDecoration(
       isDense: true,
+      
       hintText: 'Select',
       suffixIcon: Icon(Icons.arrow_drop_down),
       border: OutlineInputBorder());
