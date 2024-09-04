@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -116,8 +117,6 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
         //   readOnly: true, // Hide it from the UI but it's still functional
         //   enabled: false, // Country is fixed to India
         // ),
-
-        const SizedBox(height: 20.0),
 
         ///State TextField with custom label
         TextField(
@@ -330,11 +329,39 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   }
 
   void _showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        content: Text(message,
-            textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.white, fontSize: 16.0))));
+    showModalBottomSheet(
+      context: context,
+      isDismissible: true,
+      builder: (BuildContext context) {
+        Timer(const Duration(seconds: 20), () {
+          if (Navigator.of(context).canPop()) {
+            Navigator.of(context).pop();
+          }
+        });
+
+        return Container(
+          padding: const EdgeInsets.all(20.0),
+          height: 150,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+            ),
+          ),
+          child: Center(
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 16.0,
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   InputDecoration defaultDecoration = const InputDecoration(
