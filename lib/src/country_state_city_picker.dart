@@ -333,7 +333,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
       context: context,
       isDismissible: true,
       builder: (BuildContext context) {
-        Timer(const Duration(seconds: 20), () {
+        Timer(const Duration(seconds: 10), () {
           if (Navigator.of(context).canPop()) {
             Navigator.of(context).pop();
           }
@@ -341,7 +341,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
         return Container(
           padding: const EdgeInsets.all(20.0),
-          height: 80,
+          height: 120,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: const BorderRadius.only(
@@ -353,20 +353,20 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
             children: [
               Icon(
                 Icons.dangerous,
-                size: 20,
+                size: 40,
                 color: Colors.red,
               ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               Center(
                 child: Text(
                   'Please select a State',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16.0,
-                  ),
+                      color: Colors.black,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w200),
                 ),
               ),
             ],
