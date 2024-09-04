@@ -341,7 +341,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
         return Container(
           padding: const EdgeInsets.all(20.0),
-          height: 120,
+          height: 150,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: const BorderRadius.only(
@@ -357,7 +357,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                 color: Colors.red,
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Center(
                 child: Text(
