@@ -3526,7 +3526,7 @@
 	},
 	{
 		"id": "706",
-		"name": "Johripur",
+		"name": "Delhi",
 		"state_id": "10"
 	},
 	{
@@ -242312,6 +242312,11 @@
 	{
 		"id": "48448",
 		"name": "Jharoda Majra Burari",
+		"state_id": "10"
+	},
+	{
+		"id": "48449",
+		"name": "Johripur",
 		"state_id": "10"
 	}
 ]
