@@ -242068,5 +242068,85 @@
 		"id": "48399",
 		"name": "Amaigbo",
 		"state_id": "2663"
+	},
+	{
+		"id": "48399",
+		"name": "Álvaro Obregón",
+		"state_id": "214"
+	},
+	{
+		"id": "48400",
+		"name": "Azcapotzalco",
+		"state_id": "214"
+	},
+	{
+		"id": "48401",
+		"name": "Benito Juárez",
+		"state_id": "214"
+	},
+	{
+		"id": "48402",
+		"name": "Coyoacán",
+		"state_id": "214"
+	},
+	{
+		"id": "48403",
+		"name": "Cuajimalpa de Morelos",
+		"state_id": "214"
+	},
+	{
+		"id": "48404",
+		"name": "Cuauhtémoc",
+		"state_id": "214"
+	},
+	{
+		"id": "48405",
+		"name": "Gustavo A. Madero",
+		"state_id": "214"
+	},
+	{
+		"id": "48406",
+		"name": "Iztacalco",
+		"state_id": "214"
+	},
+	{
+		"id": "48407",
+		"name": "Iztapalapa",
+		"state_id": "214"
+	},
+	{
+		"id": "48408",
+		"name": "La Magdalena Contreras",
+		"state_id": "214"
+	},
+	{
+		"id": "48409",
+		"name": "Miguel Hidalgo",
+		"state_id": "214"
+	},
+	{
+		"id": "48410",
+		"name": "Milpa Alta",
+		"state_id": "214"
+	},
+	{
+		"id": "48411",
+		"name": "Tláhuac",
+		"state_id": "214"
+	},
+	{
+		"id": "48412",
+		"name": "Tlalpan",
+		"state_id": "214"
+	},
+	{
+		"id": "48413",
+		"name": "Venustiano Carranza",
+		"state_id": "214"
+	},
+	{
+		"id": "48414",
+		"name": "Xochimilco",
+		"state_id": "214"
 	}
 ]

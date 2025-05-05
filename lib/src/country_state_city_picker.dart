@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -13,14 +12,13 @@ class CountryStateCityPicker extends StatefulWidget {
   final InputDecoration? textFieldDecoration;
   final Color? dialogColor;
 
-  const CountryStateCityPicker({
-    super.key,
-    required this.country,
-    required this.state,
-    required this.city,
-    this.textFieldDecoration,
-    this.dialogColor,
-  });
+  const CountryStateCityPicker(
+      {super.key,
+      required this.country,
+      required this.state,
+      required this.city,
+      this.textFieldDecoration,
+      this.dialogColor});
 
   @override
   State<CountryStateCityPicker> createState() => _CountryStateCityPickerState();
@@ -38,15 +36,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
   @override
   void initState() {
+    _getCountry();
     super.initState();
-
-    // Set default country to India on initialization
-    widget.country.text = "India";
-    _getCountry(); // Load the countries list
-
-    // Auto-load states for India by passing the India ID (assuming it's in your data)
-    _getState(
-        "101"); // Assuming '101' is the ID for India, replace with actual ID if needed
   }
 
   Future<void> _getCountry() async {
@@ -103,22 +94,22 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ///Country TextField (Hidden)
-        // TextField(
-        //   controller: widget.country,
-        //   onTap: () {
-        //     // Optionally allow user to change country
-        //     // _showDialog(context); // If you want to keep this.
-        //   },
-        //   decoration: widget.textFieldDecoration == null
-        //       ? defaultDecoration.copyWith(hintText: 'Select country')
-        //       : widget.textFieldDecoration
-        //           ?.copyWith(hintText: 'Select country'),
-        //   readOnly: true, // Hide it from the UI but it's still functional
-        //   enabled: false, // Country is fixed to India
-        // ),
+        ///Country TextField
+        TextField(
+          controller: widget.country,
+          onTap: () {
+            setState(() => _title = 'Country');
+            _showDialog(context);
+          },
+          decoration: widget.textFieldDecoration == null
+              ? defaultDecoration.copyWith(hintText: 'Select country')
+              : widget.textFieldDecoration
+                  ?.copyWith(hintText: 'Select country'),
+          readOnly: true,
+        ),
+        const SizedBox(height: 8.0),
 
-        ///State TextField with custom label
+        ///State TextField
         TextField(
           controller: widget.state,
           onTap: () {
@@ -130,15 +121,13 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
             }
           },
           decoration: widget.textFieldDecoration == null
-              ? defaultDecoration.copyWith(
-                  hintText: 'Select state', labelText: 'State') // Added label
-              : widget.textFieldDecoration?.copyWith(
-                  hintText: 'Select state', labelText: 'State'), // Added label
+              ? defaultDecoration.copyWith(hintText: 'Select state')
+              : widget.textFieldDecoration?.copyWith(hintText: 'Select state'),
           readOnly: true,
         ),
-        const SizedBox(height: 20.0),
+        const SizedBox(height: 8.0),
 
-        ///City TextField with custom label
+        ///City TextField
         TextField(
           controller: widget.city,
           onTap: () {
@@ -150,10 +139,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
             }
           },
           decoration: widget.textFieldDecoration == null
-              ? defaultDecoration.copyWith(
-                  hintText: 'Select city', labelText: 'City') // Added label
-              : widget.textFieldDecoration?.copyWith(
-                  hintText: 'Select city', labelText: 'City'), // Added label
+              ? defaultDecoration.copyWith(hintText: 'Select city')
+              : widget.textFieldDecoration?.copyWith(hintText: 'Select city'),
           readOnly: true,
         ),
       ],
@@ -195,7 +182,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                               fontWeight: FontWeight.w500)),
                       const SizedBox(height: 10),
 
-                      ///Text Field for Searching
+                      ///Text Field
                       TextField(
                         controller: _title == 'Country'
                             ? controller
@@ -329,51 +316,11 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   }
 
   void _showSnackBar(String message) {
-    showModalBottomSheet(
-      context: context,
-      isDismissible: true,
-      builder: (BuildContext context) {
-        Timer(const Duration(seconds: 10), () {
-          if (Navigator.of(context).canPop()) {
-            Navigator.of(context).pop();
-          }
-        });
-
-        return Container(
-          padding: const EdgeInsets.all(20.0),
-          height: 150,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20.0),
-              topRight: Radius.circular(20.0),
-            ),
-          ),
-          child: Column(
-            children: [
-              Icon(
-                Icons.dangerous,
-                size: 40,
-                color: Colors.red,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Center(
-                child: Text(
-                  'Please select a State',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w200),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        content: Text(message,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Colors.white, fontSize: 16.0))));
   }
 
   InputDecoration defaultDecoration = const InputDecoration(
