@@ -41,18 +41,14 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     super.initState();
 
     // Set default country to India on initialization
-    widget.country.text = "India";
     _getCountry(); // Load the countries list
-
-    // Auto-load states for India by passing the India ID (assuming it's in your data)
-    _getState(
-        "101"); // Assuming '101' is the ID for India, replace with actual ID if needed
   }
 
   Future<void> _getCountry() async {
     _countryList.clear();
-    var jsonString = await rootBundle
-        .loadString('packages/country_state_city_pro/assets/country.json');
+    var jsonString = await rootBundle.loadString(
+      'packages/country_state_city_pro/assets/country.json',
+    );
     List<dynamic> body = json.decode(jsonString);
     setState(() {
       _countryList =
@@ -65,8 +61,9 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     _stateList.clear();
     _cityList.clear();
     List<StateModel> subStateList = [];
-    var jsonString = await rootBundle
-        .loadString('packages/country_state_city_pro/assets/state.json');
+    var jsonString = await rootBundle.loadString(
+      'packages/country_state_city_pro/assets/state.json',
+    );
     List<dynamic> body = json.decode(jsonString);
 
     subStateList =
@@ -84,8 +81,9 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   Future<void> _getCity(String stateId) async {
     _cityList.clear();
     List<CityModel> subCityList = [];
-    var jsonString = await rootBundle
-        .loadString('packages/country_state_city_pro/assets/city.json');
+    var jsonString = await rootBundle.loadString(
+      'packages/country_state_city_pro/assets/city.json',
+    );
     List<dynamic> body = json.decode(jsonString);
 
     subCityList = body.map((dynamic item) => CityModel.fromJson(item)).toList();
@@ -103,22 +101,20 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ///Country TextField (Hidden)
-        // TextField(
-        //   controller: widget.country,
-        //   onTap: () {
-        //     // Optionally allow user to change country
-        //     // _showDialog(context); // If you want to keep this.
-        //   },
-        //   decoration: widget.textFieldDecoration == null
-        //       ? defaultDecoration.copyWith(hintText: 'Select country')
-        //       : widget.textFieldDecoration
-        //           ?.copyWith(hintText: 'Select country'),
-        //   readOnly: true, // Hide it from the UI but it's still functional
-        //   enabled: false, // Country is fixed to India
-        // ),
+        TextField(
+          controller: widget.country,
+          onTap: () {
+            // Optionally allow user to change country
+            // _showDialog(context); // If you want to keep this.
+          },
+          decoration: widget.textFieldDecoration == null
+              ? defaultDecoration.copyWith(hintText: 'Select country')
+              : widget.textFieldDecoration
+                  ?.copyWith(hintText: 'Select country'),
+          readOnly: true, // Hide it from the UI but it's still functional
+          enabled: true, // Country is fixed to India
+        ),
 
-        ///State TextField with custom label
         TextField(
           controller: widget.state,
           onTap: () {
@@ -131,9 +127,13 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
           },
           decoration: widget.textFieldDecoration == null
               ? defaultDecoration.copyWith(
-                  hintText: 'Select state', labelText: 'State') // Added label
+                  hintText: 'Select state',
+                  labelText: 'State',
+                ) // Added label
               : widget.textFieldDecoration?.copyWith(
-                  hintText: 'Select state', labelText: 'State'), // Added label
+                  hintText: 'Select state',
+                  labelText: 'State',
+                ), // Added label
           readOnly: true,
         ),
         const SizedBox(height: 20.0),
@@ -151,9 +151,13 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
           },
           decoration: widget.textFieldDecoration == null
               ? defaultDecoration.copyWith(
-                  hintText: 'Select city', labelText: 'City') // Added label
+                  hintText: 'Select city',
+                  labelText: 'City',
+                ) // Added label
               : widget.textFieldDecoration?.copyWith(
-                  hintText: 'Select city', labelText: 'City'), // Added label
+                  hintText: 'Select city',
+                  labelText: 'City',
+                ), // Added label
           readOnly: true,
         ),
       ],
@@ -188,11 +192,14 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                   child: Column(
                     children: [
                       const SizedBox(height: 10),
-                      Text(_title,
-                          style: TextStyle(
-                              color: Colors.grey.shade800,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500)),
+                      Text(
+                        _title,
+                        style: TextStyle(
+                          color: Colors.grey.shade800,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                       const SizedBox(height: 10),
 
                       ///Text Field for Searching
@@ -206,41 +213,57 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                           setState(() {
                             if (_title == 'Country') {
                               _countrySubList = _countryList
-                                  .where((element) => element.name
-                                      .toLowerCase()
-                                      .contains(controller.text.toLowerCase()))
+                                  .where(
+                                    (element) =>
+                                        element.name.toLowerCase().contains(
+                                              controller.text.toLowerCase(),
+                                            ),
+                                  )
                                   .toList();
                             } else if (_title == 'State') {
                               _stateSubList = _stateList
-                                  .where((element) => element.name
-                                      .toLowerCase()
-                                      .contains(controller2.text.toLowerCase()))
+                                  .where(
+                                    (element) =>
+                                        element.name.toLowerCase().contains(
+                                              controller2.text.toLowerCase(),
+                                            ),
+                                  )
                                   .toList();
                             } else if (_title == 'City') {
                               _citySubList = _cityList
-                                  .where((element) => element.name
-                                      .toLowerCase()
-                                      .contains(controller3.text.toLowerCase()))
+                                  .where(
+                                    (element) =>
+                                        element.name.toLowerCase().contains(
+                                              controller3.text.toLowerCase(),
+                                            ),
+                                  )
                                   .toList();
                             }
                           });
                         },
                         style: TextStyle(
-                            color: Colors.grey.shade800, fontSize: 16.0),
+                          color: Colors.grey.shade800,
+                          fontSize: 16.0,
+                        ),
                         decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            hintText: "Search here...",
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 15, horizontal: 5),
-                            isDense: true,
-                            prefixIcon: Icon(Icons.search)),
+                          border: UnderlineInputBorder(),
+                          hintText: "Search here...",
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 15,
+                            horizontal: 5,
+                          ),
+                          isDense: true,
+                          prefixIcon: Icon(Icons.search),
+                        ),
                       ),
 
                       ///Dropdown Items
                       Expanded(
                         child: ListView.builder(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 12),
+                            horizontal: 8,
+                            vertical: 12,
+                          ),
                           itemCount: _title == 'Country'
                               ? _countrySubList.length
                               : _title == 'State'
@@ -276,16 +299,21 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(
-                                    bottom: 20.0, left: 10.0, right: 10.0),
+                                  bottom: 20.0,
+                                  left: 10.0,
+                                  right: 10.0,
+                                ),
                                 child: Text(
-                                    _title == 'Country'
-                                        ? _countrySubList[index].name
-                                        : _title == 'State'
-                                            ? _stateSubList[index].name
-                                            : _citySubList[index].name,
-                                    style: TextStyle(
-                                        color: Colors.grey.shade800,
-                                        fontSize: 16.0)),
+                                  _title == 'Country'
+                                      ? _countrySubList[index].name
+                                      : _title == 'State'
+                                          ? _stateSubList[index].name
+                                          : _citySubList[index].name,
+                                  style: TextStyle(
+                                    color: Colors.grey.shade800,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
                               ),
                             );
                           },
@@ -293,8 +321,10 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                       ),
                       OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0))),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                        ),
                         onPressed: () {
                           if (_title == 'City' && _citySubList.isEmpty) {
                             widget.city.text = controller3.text;
@@ -309,7 +339,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                           Navigator.pop(context);
                         },
                         child: const Text('Close'),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -320,8 +350,10 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
       },
       transitionBuilder: (_, anim, __, child) {
         return SlideTransition(
-          position: Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
-              .animate(anim),
+          position: Tween(
+            begin: const Offset(0, -1),
+            end: const Offset(0, 0),
+          ).animate(anim),
           child: child,
         );
       },
@@ -351,22 +383,17 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
           ),
           child: Column(
             children: [
-              Icon(
-                Icons.dangerous,
-                size: 40,
-                color: Colors.red,
-              ),
-              SizedBox(
-                height: 10,
-              ),
+              Icon(Icons.dangerous, size: 40, color: Colors.red),
+              SizedBox(height: 10),
               Center(
                 child: Text(
                   'Please select a State',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w200),
+                    color: Colors.black,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w200,
+                  ),
                 ),
               ),
             ],
@@ -377,8 +404,9 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   }
 
   InputDecoration defaultDecoration = const InputDecoration(
-      isDense: true,
-      hintText: 'Select',
-      suffixIcon: Icon(Icons.arrow_drop_down),
-      border: OutlineInputBorder());
+    isDense: true,
+    hintText: 'Select',
+    suffixIcon: Icon(Icons.arrow_drop_down),
+    border: OutlineInputBorder(),
+  );
 }
