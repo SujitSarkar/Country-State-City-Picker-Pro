@@ -153640,6 +153640,161 @@
 		"state_id": "2649"
 	},
 	{
+		"id": "48400",
+		"name": "Abak",
+		"state_id": "2650"
+	},
+	{
+		"id": "48401",
+		"name": "Eastern Obolo",
+		"state_id": "2650"
+	},
+	{
+		"id": "48402",
+		"name": "Eket",
+		"state_id": "2650"
+	},
+	{
+		"id": "48403",
+		"name": "Esit Eket",
+		"state_id": "2650"
+	},
+	{
+		"id": "48404",
+		"name": "Essien Udim",
+		"state_id": "2650"
+	},
+	{
+		"id": "48405",
+		"name": "Etim Ekpo",
+		"state_id": "2650"
+	},
+	{
+		"id": "48406",
+		"name": "Etinan",
+		"state_id": "2650"
+	},
+	{
+		"id": "48407",
+		"name": "Ibeno",
+		"state_id": "2650"
+	},
+	{
+		"id": "48408",
+		"name": "Ibesikpo Asutan",
+		"state_id": "2650"
+	},
+	{
+		"id": "48409",
+		"name": "Ibiono Ibom",
+		"state_id": "2650"
+	},
+	{
+		"id": "48410",
+		"name": "Ibiono Ibom",
+		"state_id": "2650"
+	},
+	{
+		"id": "48411",
+		"name": "Ika",
+		"state_id": "2650"
+	},
+	{
+		"id": "48412",
+		"name": "Ikono",
+		"state_id": "2650"
+	},
+	{
+		"id": "48413",
+		"name": "Ikot Abasi",
+		"state_id": "2650"
+	},
+	{
+		"id": "48414",
+		"name": "Ikot Ekpene",
+		"state_id": "2650"
+	},
+	{
+		"id": "48415",
+		"name": "Ini",
+		"state_id": "2650"
+	},
+	{
+		"id": "48416",
+		"name": "Itu",
+		"state_id": "2650"
+	},
+	{
+		"id": "48417",
+		"name": "Mbo",
+		"state_id": "2650"
+	},
+	{
+		"id": "48418",
+		"name": "Mkpat Enin",
+		"state_id": "2650"
+	},
+	{
+		"id": "48419",
+		"name": "Nsit Atai",
+		"state_id": "2650"
+	},
+	{
+		"id": "48420",
+		"name": "Nsit Ibom",
+		"state_id": "2650"
+	},
+	{
+		"id": "48421",
+		"name": "Nsit Ubium",
+		"state_id": "2650"
+	},
+	{
+		"id": "48422",
+		"name": "Obot Akara",
+		"state_id": "2650"
+	},
+	{
+		"id": "48423",
+		"name": "Okobo",
+		"state_id": "2650"
+	},
+	{
+		"id": "48424",
+		"name": "Onna",
+		"state_id": "2650"
+	},
+	{
+		"id": "48425",
+		"name": "Oron",
+		"state_id": "2650"
+	},
+	{
+		"id": "48426",
+		"name": "Oruk Anam",
+		"state_id": "2650"
+	},
+	{
+		"id": "48427",
+		"name": "Ukanafun",
+		"state_id": "2650"
+	},
+	{
+		"id": "48428",
+		"name": "Urue-Offong/Oruko",
+		"state_id": "2650"
+	},
+	{
+		"id": "48429",
+		"name": "Uruan",
+		"state_id": "2650"
+	},
+	{
+		"id": "48430",
+		"name": "Uyo",
+		"state_id": "2650"
+	},
+	{
 		"id": "30714",
 		"name": "Aguata",
 		"state_id": "2651"
